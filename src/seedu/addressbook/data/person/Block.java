@@ -13,7 +13,7 @@ public class Block {
             "Person block should only contain numbers";
     public static final String BLOCK_VALIDATION_REGEX = "\\d+";
 	
-	public final String blockNumber;
+	private final String blockNumber;
 
     /**
      * Validates block number

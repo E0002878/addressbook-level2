@@ -13,12 +13,12 @@ public class Street {
             "Person block can contain letters and numbers but not symbols";
     public static final String STREET_VALIDATION_REGEX = "\\w\\s+";
 	
-	public final String streetName;
+	private final String streetName;
 	
 	/**
      * Validates street name
      * 
-     * @throws IllegalValueException if given block is invalid
+     * @throws IllegalValueException if given street is invalid
      */
     public Street(String street) throws IllegalValueException{
     	street = street.trim();
