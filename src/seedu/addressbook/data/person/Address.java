@@ -8,11 +8,15 @@ import seedu.addressbook.data.exception.IllegalValueException;
  */
 public class Address {
 
-    public static final String EXAMPLE = "123, some street";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
+    public static final String EXAMPLE = "a/123, Clementi Ave 3, #12-34, 231534";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses must contain the block"
+    		+ ", street, unit and postal code with each separated by a ,";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
 
-    public final String value;
+    private final Block blockNumber;
+    private final Street streetName;
+    private final Unit unitNumber;
+    private final PostalCode postalCode;
     private boolean isPrivate;
 
     /**
@@ -21,11 +25,56 @@ public class Address {
      * @throws IllegalValueException if given address string is invalid.
      */
     public Address(String address, boolean isPrivate) throws IllegalValueException {
+    	
         this.isPrivate = isPrivate;
         if (!isValidAddress(address)) {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        this.value = address;
+        createAddress(address);
+    }
+    
+    private void createAddress(String address){
+        String[] addressSegment = address.split(",");
+        
+        blockNumber = new Block(addressSegment[0].trim());
+        streetName = new Street(addressSegment[1].trim());
+        unitNumber = new Unit(addressSegment[2].trim());
+        postalCode= new PostalCode(addressSegment[3].trim());
+    }
+    
+    /**
+     * @return the blockNumber
+     */
+    private String getBlock() {
+    	return blockNumber.getBlock();
+    }
+
+    /**
+     * @return the streetName
+     */
+    private String getStreet() {
+        return streetName.getStreet();
+    }
+
+    /**
+     * @return the unitNumber
+     */
+    private String getUnit() {
+        return unitNumber.getUnit();
+    }
+
+    /**
+     * @return the postalCodeNumber
+     */
+    private String getPostalCode() {
+        return postalCode.getPostalCode();
+    }
+    /**
+     * @return the String representation of the address formatted 
+     * by BLOCK, STREET, UNIT, POSTAL_CODE 
+     */
+    public String getAddress() {
+    	return this.toString();
     }
 
     /**
@@ -37,19 +86,19 @@ public class Address {
 
     @Override
     public String toString() {
-        return value;
+        return "" + getBlock() + ", " + getStreet() + ", " + getUnit() + ", " + getPostalCode();;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                && this.getAddress().equals(((Address) other).getAddress())); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return getAddress().hashCode();
     }
 
     public boolean isPrivate() {
