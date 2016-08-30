@@ -48,5 +48,9 @@ public class Street {
     public int hashCode() {
         return streetName.hashCode();
     }
+    
+    public String getStreet() {
+        return streetName;
+    }
 	
 }

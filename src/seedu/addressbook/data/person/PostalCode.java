@@ -48,4 +48,8 @@ public class PostalCode {
     public int hashCode() {
         return postalCodeNumber.hashCode();
     }
+    
+    public String getPostalCode() {
+        return postalCodeNumber;
+    }
 }

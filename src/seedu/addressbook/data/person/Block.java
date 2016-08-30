@@ -48,6 +48,10 @@ public class Block {
     public int hashCode() {
         return blockNumber.hashCode();
     }
+    
+    public String getBlock() {
+        return blockNumber;
+    }
 
 	
 }

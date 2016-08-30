@@ -47,5 +47,9 @@ public class Unit {
     public int hashCode() {
         return unitNumber.hashCode();
     }
+    
+    public String getUnit() {
+        return unitNumber;
+    }
 
 }
