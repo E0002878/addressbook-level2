@@ -12,11 +12,11 @@ public class Address {
     public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses must contain the block"
     		+ ", street, unit and postal code with each separated by a ,";
     public static final String ADDRESS_VALIDATION_REGEX = ".+";
-
-    private final Block blockNumber;
-    private final Street streetName;
-    private final Unit unitNumber;
-    private final PostalCode postalCode;
+	
+    private Block blockNumber;
+    private Street streetName;
+    private Unit unitNumber;
+    private PostalCode postalCode;
     private boolean isPrivate;
 
     /**
@@ -33,42 +33,23 @@ public class Address {
         createAddress(address);
     }
     
-    private void createAddress(String address){
+    private void createAddress(String address) throws IllegalValueException {
+    	final int BLOCK_INDEX = 0;
+    	final int STREET_INDEX = 1;
+    	final int UNIT_INDEX = 2;
+    	final int POSTAL_CODE_INDEX = 3;
+
         String[] addressSegment = address.split(",");
+        if (addressSegment.length != 3) {
+        	throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+        }
         
-        blockNumber = new Block(addressSegment[0].trim());
-        streetName = new Street(addressSegment[1].trim());
-        unitNumber = new Unit(addressSegment[2].trim());
-        postalCode= new PostalCode(addressSegment[3].trim());
+        blockNumber = new Block(addressSegment[BLOCK_INDEX].trim());
+        streetName = new Street(addressSegment[STREET_INDEX].trim());
+        unitNumber = new Unit(addressSegment[UNIT_INDEX].trim());
+        postalCode= new PostalCode(addressSegment[POSTAL_CODE_INDEX].trim());
     }
     
-    /**
-     * @return the blockNumber
-     */
-    private String getBlock() {
-    	return blockNumber.getBlock();
-    }
-
-    /**
-     * @return the streetName
-     */
-    private String getStreet() {
-        return streetName.getStreet();
-    }
-
-    /**
-     * @return the unitNumber
-     */
-    private String getUnit() {
-        return unitNumber.getUnit();
-    }
-
-    /**
-     * @return the postalCodeNumber
-     */
-    private String getPostalCode() {
-        return postalCode.getPostalCode();
-    }
     /**
      * @return the String representation of the address formatted 
      * by BLOCK, STREET, UNIT, POSTAL_CODE 
@@ -86,7 +67,8 @@ public class Address {
 
     @Override
     public String toString() {
-        return "" + getBlock() + ", " + getStreet() + ", " + getUnit() + ", " + getPostalCode();;
+        return "" + blockNumber.getBlock() + ", " + streetName.getStreet() + ", " + unitNumber.getUnit() + ", " 
+        		+ postalCode.getPostalCode();
     }
 
     @Override
