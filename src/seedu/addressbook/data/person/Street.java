@@ -11,7 +11,7 @@ public class Street {
 	public static final String EXAMPLE = "Clementi Ave 3";
     public static final String MESSAGE_STREET_CONSTRAINTS =
             "Person block can contain letters and numbers but not symbols";
-    public static final String STREET_VALIDATION_REGEX = "\\w\\s+";
+    public static final String STREET_VALIDATION_REGEX = "[\\w\\s]+";
 	
 	private final String streetName;
 	

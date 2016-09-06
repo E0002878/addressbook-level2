@@ -40,7 +40,7 @@ public class Address {
     	final int POSTAL_CODE_INDEX = 3;
 
         String[] addressSegment = address.split(",");
-        if (addressSegment.length != 3) {
+        if (addressSegment.length != 4) {
         	throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         

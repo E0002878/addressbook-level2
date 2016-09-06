@@ -10,7 +10,7 @@ public class Unit {
 	public static final String EXAMPLE = "#12-34";
     public static final String MESSAGE_UNIT_CONSTRAINTS =
             "Person unit should start with a # with a - in between";
-    public static final String UNIT_VALIDATION_REGEX = "\\p{#}\\d+\\p{-}\\d+";
+    public static final String UNIT_VALIDATION_REGEX = "[\\p{#}\\d]+[\\p{-}\\d]+";
 	
 	private final String unitNumber;
 
